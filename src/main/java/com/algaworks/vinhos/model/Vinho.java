@@ -8,26 +8,45 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.NumberFormat;
 @Entity
 public class Vinho {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long codigo;
+	
+	@NotBlank
 	private String nome;
+	
+	@NotNull
 	private BigDecimal preco;
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
 	private TipoVinho tipo;
+	
 	public Long getCodigo() {
 		return codigo;
 	}
+	
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
+	
+	
 	public String getNome() {
 		return nome;
 	}
+	
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	@NumberFormat(pattern = "#,##0.00")
 	public BigDecimal getPreco() {
 		return preco;
 	}
